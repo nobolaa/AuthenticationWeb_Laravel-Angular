@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
     this.http.post<any>(this.authenticationURL, data).subscribe(
       (response) => {
         localStorage.setItem('token', response.access_token)
+        
         this.router.navigate(['/secure']);
         console.log(response.access_token);
       },

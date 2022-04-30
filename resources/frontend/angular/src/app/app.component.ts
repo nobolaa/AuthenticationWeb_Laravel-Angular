@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { LoggedService } from './shared/services/logged.service';
 
 @Component({
   selector: 'app-root',
@@ -7,14 +9,16 @@ import { Component, OnInit } from '@angular/core';
 })
 
 export class AppComponent implements OnInit{
-  loggedIn = false;
+  loggedIn$ = this.loggedSvc.loggedIn$;
+
+  constructor(private loggedSvc: LoggedService){}
 
   ngOnInit(){
-    this.loggedIn = (localStorage.getItem('token') !== null)
+    this.loggedSvc.newValue();
   }
-
 
   logout(){
     localStorage.removeItem('token');
+    this.loggedSvc.newValue();
   }
 }

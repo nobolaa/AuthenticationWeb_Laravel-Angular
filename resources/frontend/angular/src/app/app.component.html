@@ -4,9 +4,13 @@
             <a class="nav-link active" routerLink="/">Home</a>
         </li>
     </ul>
-    <div class="navbar-nav mx-4">
-        <a class="nav-link" routerLink="login" *ngIf="!loggedIn">Login</a>
-        <a class="nav-link" routerLink="/" *ngIf="loggedIn" (click)="logout()">Logout</a>
+    <div class="navbar-nav mx-5">
+        <div class="row">        
+            <a class="nav-link col-6" routerLink="login" *ngIf="!(loggedIn$ | async)">Login</a>   
+            <a class="nav-link col-6" routerLink="register" *ngIf="!(loggedIn$ | async)">Register</a>   
+         </div> 
+        <a class="nav-link" routerLink="/" *ngIf="(loggedIn$ | async)" (click)="logout()">Logout</a>
+       
     </div>
 </nav>
 
